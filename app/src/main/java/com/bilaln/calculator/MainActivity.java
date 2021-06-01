@@ -1,7 +1,12 @@
 package com.bilaln.calculator;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.constraintlayout.widget.ConstraintLayout;
+
 import java.lang.Math;
+
+import android.content.Intent;
+import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -11,11 +16,12 @@ import android.widget.TextView;
 
 import java.util.Optional;
 
-public class MainActivity extends AppCompatActivity  {
-TextView tvresult,tvsign,tvfinder;
-Button btnunderrt,btnlog,btnsin,btncos,btntan,btn9,btn8,btn7,btn6,btn5,btn4,btn3,btn2,btn1,btn0,btnadd,btnsub,btnmul,btndiv,btneql,btnclr,btnpower,btndot,btnpie;
-   double num1=0,num2=0,result=0,a=0,b=0;
-   String oprtr="";
+public class MainActivity extends AppCompatActivity {
+    TextView tvresult, tvsign, tvfinder;
+    Button btnunderrt, btnlog, btnsin, btncos, btntan, btn9, btn8, btn7, btn6, btn5, btn4, btn3, btn2, btn1, btn0, btnadd, btnsub, btnmul, btndiv, btneql, btnclr, btnpower, btndot, btnpie;
+    double num1 = 0, num2 = 0, result = 0, a = 0, b = 0;
+    String oprtr = "";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -45,7 +51,8 @@ Button btnunderrt,btnlog,btnsin,btncos,btntan,btn9,btn8,btn7,btn6,btn5,btn4,btn3
         btndot = (Button) findViewById(R.id.btndot);
         btnpie = (Button) findViewById(R.id.btnpie);
 
-        btnclr = (Button) findViewById(R.id.btnclear);btnpower = (Button) findViewById(R.id.btnpower);
+        btnclr = (Button) findViewById(R.id.btnclear);
+        btnpower = (Button) findViewById(R.id.btnpower);
         btneql = (Button) findViewById(R.id.btneql);
         tvfinder.setText("");
         btn0.setOnClickListener(new View.OnClickListener() {
@@ -122,32 +129,31 @@ Button btnunderrt,btnlog,btnsin,btncos,btntan,btn9,btn8,btn7,btn6,btn5,btn4,btn3
         btndot.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (tvsign.getText()==""){
+                if (tvsign.getText() == "") {
                     tvsign.setText(tvsign.getText() + "0.");
-                }
-                else {
-                    tvsign.setText(tvsign.getText() + ".");
                     tvfinder.setText(tvfinder.getText() + "0.");
+                } else {
+                    tvsign.setText(tvsign.getText() + ".");
+                    tvfinder.setText(tvfinder.getText() + ".");
                 }
             }
         });
         btnpie.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-               try {
-                   if (tvsign.getText() == "") {
-                       tvresult.setText("Error");
-                   } else {
+                try {
+                    if (tvsign.getText() == "") {
+                        tvresult.setText("Error");
+                    } else {
 
-                       tvsign.setText(tvfinder.getText()+"π");
-                   }
-                    oprtr="pie";
-               }
-               catch (Exception ex){
-                   tvresult.setText("Error");
-                   tvsign.setText("");
+                        tvsign.setText(tvfinder.getText() + "π");
+                    }
+                    oprtr = "pie";
+                } catch (Exception ex) {
+                    tvresult.setText("Error");
+                    tvsign.setText("");
 
-               }
+                }
             }
         });
 
@@ -410,23 +416,21 @@ Button btnunderrt,btnlog,btnsin,btncos,btntan,btn9,btn8,btn7,btn6,btn5,btn4,btn3
             @Override
             public void onClick(View v) {
                 if (tvfinder.getText() == "") {
-                }
-                else {
+                } else {
                     tvsign.setText(tvfinder.getText() + "^");
-                     a=Double.parseDouble(tvfinder.getText().toString());
+                    a = Double.parseDouble(tvfinder.getText().toString());
                     tvfinder.setText("");
-                    oprtr="pow";
+                    oprtr = "pow";
                 }
             }
         });
         btnsin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (tvfinder.getText()==""&&tvsign.getText()==""){
+                if (tvfinder.getText() == "" && tvsign.getText() == "") {
                     tvsign.setText("sin(");
-                    oprtr="sin";
-                }
-                else {
+                    oprtr = "sin";
+                } else {
                     tvresult.setText("Error");
                 }
             }
@@ -434,11 +438,10 @@ Button btnunderrt,btnlog,btnsin,btncos,btntan,btn9,btn8,btn7,btn6,btn5,btn4,btn3
         btncos.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (tvfinder.getText()==""&&tvsign.getText()==""){
+                if (tvfinder.getText() == "" && tvsign.getText() == "") {
                     tvsign.setText("cos(");
-                    oprtr="cos";
-                }
-                else {
+                    oprtr = "cos";
+                } else {
                     tvresult.setText("Error");
                 }
             }
@@ -446,11 +449,10 @@ Button btnunderrt,btnlog,btnsin,btncos,btntan,btn9,btn8,btn7,btn6,btn5,btn4,btn3
         btntan.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (tvfinder.getText()==""&&tvsign.getText()==""){
+                if (tvfinder.getText() == "" && tvsign.getText() == "") {
                     tvsign.setText("tan(");
-                    oprtr="tan";
-                }
-                else {
+                    oprtr = "tan";
+                } else {
                     tvresult.setText("Error");
                 }
             }
@@ -458,11 +460,10 @@ Button btnunderrt,btnlog,btnsin,btncos,btntan,btn9,btn8,btn7,btn6,btn5,btn4,btn3
         btnunderrt.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (tvfinder.getText()==""&&tvsign.getText()==""){
+                if (tvfinder.getText() == "" && tvsign.getText() == "") {
                     tvsign.setText("√");
-                    oprtr="root";
-                }
-                else {
+                    oprtr = "root";
+                } else {
                     tvresult.setText("Error");
                 }
             }
@@ -470,11 +471,10 @@ Button btnunderrt,btnlog,btnsin,btncos,btntan,btn9,btn8,btn7,btn6,btn5,btn4,btn3
         btnlog.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (tvfinder.getText()==""&&tvsign.getText()==""){
+                if (tvfinder.getText() == "" && tvsign.getText() == "") {
                     tvsign.setText("log");
-                    oprtr="log";
-                }
-                else {
+                    oprtr = "log";
+                } else {
                     tvresult.setText("Error");
                 }
             }
@@ -490,143 +490,225 @@ Button btnunderrt,btnlog,btnsin,btncos,btntan,btn9,btn8,btn7,btn6,btn5,btn4,btn3
                 oprtr = "";
                 result = 0;
                 num1 = 0;
-                a=0;b=0;
+                a = 0;
+                b = 0;
+
             }
         });
-            btneql.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
+        btneql.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                try {
                     try {
-                        try {
-                            switch (oprtr) {
-                                case "":
-                                    tvresult.setText(String.valueOf(result));
-                                    break;
-                                case "+":
-                                    adder();
-                                    break;
-                                case "-":
-                                    minus();
-                                    break;
-                                case "*":
-                                    multply();
-                                    break;
-                                case "/":
-                                    div();
-                                    break;
-                                case "pow":
-                                     pow();
-                                    break;
-                                case "sin":
-                                   sin();
-                                    break;
-                                case "cos":
-                                    cos();
-                                    break;
-                                case "tan":
-                                    tan();
-                                    break;
-                                case "root":
-                                    sqrt();
-                                    break;
-                                case "log":
-                                    log();
-                                    break;
-                                case "pie":
-                                    pie();
-                                    break;
+                        switch (oprtr) {
+                            case "":
+                                //tvresult.setText(String.valueOf(result));
+                                break;
+                            case "+":
+                                tvsign.setHint("");
+                                adder();
+                                break;
+                            case "-":
+                                tvsign.setHint("");
+                                minus();
+                                break;
+                            case "*":
+                                tvsign.setHint("");
+                                multply();
+                                break;
+                            case "/":
+                                tvsign.setHint("");
+                                div();
+                                break;
+                            case "pow":
+                                tvsign.setHint("");
+                                pow();
+                                break;
+                            case "sin":
+                                tvsign.setHint("");
+                                sin();
+                                break;
+                            case "cos":
+                                tvsign.setHint("");
+                                cos();
+                                break;
+                            case "tan":
+                                tvsign.setHint("");
+                                tan();
+                                break;
+                            case "root":
+                                tvsign.setHint("");
+                                sqrt();
+                                break;
+                            case "log":
+                                tvsign.setHint("");
+                                log();
+                                break;
+                            case "pie":
+                                tvsign.setHint("");
+                                pie();
+                                break;
 
 
-                            }
-                            tvfinder.setText(String.valueOf(result));
-                            result = 0;a=0;b=0;
-                            oprtr ="";
-                            tvsign.setText("");
                         }
-                        catch (Exception e) {
-                            tvresult.setText("Error");
-                            tvsign.setText("");
-                            tvfinder.setText("");
-                            result = 0;
-                        }
-                    }
-                    catch (Exception e){
+                        tvfinder.setText(String.valueOf(result));
+                        result = 0;
+                        a = 0;
+                        b = 0;
+                        oprtr = "";
+                        tvsign.setText("");
+                    } catch (Exception e) {
                         tvresult.setText("Error");
                         tvsign.setText("");
                         tvfinder.setText("");
                         result = 0;
                     }
-
+                } catch (Exception e) {
+                    tvresult.setText("Error");
+                    tvsign.setText("");
+                    tvfinder.setText("");
+                    result = 0;
                 }
-            });
+
+            }
+        });
 
 
     }
-        public void adder ()
-        {
-            result = result + (Double.parseDouble(tvfinder.getText().toString()));
-            tvresult.setText(String.valueOf(result));
-            tvfinder.setText(null);
-        }
-        public void minus ()
-        {
-            result = result - (Double.parseDouble(tvfinder.getText().toString()));
-            tvresult.setText(String.valueOf(result));
-            tvfinder.setText(null);
-        }
-        public void multply ()
-        {
-            result = result * (Double.parseDouble(tvfinder.getText().toString()));
-            tvresult.setText(String.valueOf(result));
-            tvfinder.setText(null);
 
-        }
-        public void div ()
-        {
-            result = result / (Double.parseDouble(tvfinder.getText().toString()));
+    public void adder() {
+        result = result + (Double.parseDouble(tvfinder.getText().toString()));
+        if (result % 1 != 0) {
             tvresult.setText(String.valueOf(result));
-            tvfinder.setText(null);
+        } else {
+            int res = (int) result;
+            tvresult.setText(String.valueOf(res));
         }
-        public void log(){
-            a=Double.parseDouble(tvfinder.getText().toString());
-            result=Math.log(a);
+        tvfinder.setText(null);
+    }
+
+    public void minus() {
+        result = result - (Double.parseDouble(tvfinder.getText().toString()));
+        if (result % 1 != 0) {
             tvresult.setText(String.valueOf(result));
-            tvfinder.setText(null);
+        } else {
+            int res = (int) result;
+            tvresult.setText(String.valueOf(res));
         }
-    public void sin(){
-        a=Double.parseDouble(tvfinder.getText().toString());
-        result=Math.sin(a);
-        tvresult.setText(String.valueOf(result));
         tvfinder.setText(null);
     }
-    public void cos(){
-        a=Double.parseDouble(tvfinder.getText().toString());
-        result=Math.cos(a);
-        tvresult.setText(String.valueOf(result));
+
+    public void multply() {
+        result = result * (Double.parseDouble(tvfinder.getText().toString()));
+        if (result % 1 != 0) {
+            tvresult.setText(String.valueOf(result));
+        } else {
+            int res = (int) result;
+            tvresult.setText(String.valueOf(res));
+        }
+        tvfinder.setText(null);
+
+    }
+
+    public void div() {
+        result = result / (Double.parseDouble(tvfinder.getText().toString()));
+        if (result % 1 != 0) {
+            tvresult.setText(String.valueOf(result));
+        } else {
+            int res = (int) result;
+            tvresult.setText(String.valueOf(res));
+        }
         tvfinder.setText(null);
     }
-    public void tan(){
-        a=Double.parseDouble(tvfinder.getText().toString());
-        result=Math.tan(a);
-        tvresult.setText(String.valueOf(result));
+
+    public void log() {
+        a = Double.parseDouble(tvfinder.getText().toString());
+        result = Math.log(a);
+
+        if (result % 1 != 0) {
+            tvresult.setText(String.valueOf(result));
+        } else {
+            int res = (int) result;
+            tvresult.setText(String.valueOf(res));
+        }
         tvfinder.setText(null);
     }
-    public void sqrt(){
-        a=Double.parseDouble(tvfinder.getText().toString());
-        result=Math.sqrt(a);
-        tvresult.setText(String.valueOf(result));
+
+    public void sin() {
+        a = Double.parseDouble(tvfinder.getText().toString());
+        result = Math.sin(a);
+
+        if (result % 1 != 0) {
+            tvresult.setText(String.valueOf(result));
+        } else {
+            int res = (int) result;
+            tvresult.setText(String.valueOf(res));
+        }
         tvfinder.setText(null);
     }
-    public void pow(){
-        b=Double.parseDouble(tvfinder.getText().toString());
-        result=Math.pow(a,b);
-        tvresult.setText(String.valueOf(result));
+
+    public void cos() {
+        a = Double.parseDouble(tvfinder.getText().toString());
+        result = Math.cos(a);
+
+        if (result % 1 != 0) {
+            tvresult.setText(String.valueOf(result));
+        } else {
+            int res = (int) result;
+            tvresult.setText(String.valueOf(res));
+        }
         tvfinder.setText(null);
     }
-    public  void pie(){
+
+    public void tan() {
+        a = Double.parseDouble(tvfinder.getText().toString());
+        result = Math.tan(a);
+
+        if (result % 1 != 0) {
+            tvresult.setText(String.valueOf(result));
+        } else {
+            int res = (int) result;
+            tvresult.setText(String.valueOf(res));
+        }
+        tvfinder.setText(null);
+    }
+
+    public void sqrt() {
+        a = Double.parseDouble(tvfinder.getText().toString());
+        result = Math.sqrt(a);
+
+        if (result % 1 != 0) {
+            tvresult.setText(String.valueOf(result));
+        } else {
+            int res = (int) result;
+            tvresult.setText(String.valueOf(res));
+        }
+        tvfinder.setText(null);
+    }
+
+    public void pow() {
+        b = Double.parseDouble(tvfinder.getText().toString());
+        result = Math.pow(a, b);
+
+        if (result % 1 != 0) {
+            tvresult.setText(String.valueOf(result));
+        } else {
+            int res = (int) result;
+            tvresult.setText(String.valueOf(res));
+        }
+        tvfinder.setText(null);
+    }
+
+    public void pie() {
         double pie = Double.parseDouble(tvfinder.getText().toString());
         result = pie * 3.14;
-        tvresult.setText(String.valueOf(result));
+
+        if (result % 1 != 0) {
+            tvresult.setText(String.valueOf(result));
+        } else {
+            int res = (int) result;
+            tvresult.setText(String.valueOf(res));
+        }
         tvfinder.setText(null);
     }
 }
